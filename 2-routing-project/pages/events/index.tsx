@@ -1,19 +1,21 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import EventList from '../../components/events/EventList';
+import EventsSearch from '../../components/events/EventsSearch';
+import { getAllEvents } from '../../global-data';
 
 export default function Events() {
+
+    const router = useRouter();
+    const events = getAllEvents();
+
+    const findEventsHandler = (year: string, month: string) => {
+        router.push(`/events/${year}/${month}`).then();
+    }
+
     return (
         <div>
-            <h1>Welcome to the Events page!</h1>
-            <ul>
-                {new Array(5).fill("").map((_, i) => (
-                    <li key={i}>
-                        <Link href={{
-                            pathname: '/events/[eventId]',
-                            query: { eventId: i },
-                        }}>{'Event ' + (i+1)}</Link>
-                    </li>
-                ))}
-            </ul>
+            <EventsSearch onSearch={findEventsHandler}/>
+            <EventList events={events}/>
         </div>
     )
 }

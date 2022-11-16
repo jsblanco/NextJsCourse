@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import EventList from '../components/events/EventList';
-import { getFeaturedEvents } from '../dummy-data';
+import { getFeaturedEvents } from '../global-data';
 
 export default function Home() {
 

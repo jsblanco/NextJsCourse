@@ -1,9 +1,9 @@
-import { EventData } from '../../dummy-data';
-import AddressIcon from '../icons/address-icon';
-import ArrowRightIcon from '../icons/arrow-right-icon';
-import DateIcon from '../icons/date-icon';
+import { EventData } from '../../global-data';
+import AddressIcon from '../icons/AddressIcon';
+import ArrowRightIcon from '../icons/ArrowRightIcon';
+import DateIcon from '../icons/DateIcon';
 import Button from '../ui/Button';
-import classes from './event-item.module.css'
+import classes from './EventItem.module.css'
 
 export default function EventItem({ event }: { event: EventData }) {
 
