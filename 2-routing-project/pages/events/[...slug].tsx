@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import ErrorAlert from '../../components/events/ErrorAlert';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/ResultsTitle';
-import { getFilteredEvents, months } from '../../global-data';
+import { getFilteredEvents } from '../../global-data';
 
 export default function FilteredEventsPage() {
 
