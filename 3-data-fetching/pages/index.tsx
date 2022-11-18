@@ -1,23 +1,30 @@
+import Link from 'next/link';
 import path from 'path';
 import fs from 'fs/promises';
+import { getData } from '../helpers';
 
-function HomePage({ products }) {
-
+export default function HomePage({ products }) {
     return (
         <ul>
-            {products.map(product => <li key={product.key}>{product.title}</li>)}
+            {products.map((product) => <li key={product.id}>
+                <Link href={'/products/' + product.id}>
+                    {product.title}
+                </Link>
+            </li>)}
         </ul>
     );
 }
 
 export async function getStaticProps() {
-    const data = JSON.parse(await fs.readFile(path.join(process.cwd(), 'data', 'dummy-backend.json'), 'utf-8'));
+    const data = await getData();
+
+    if (!data.products || data.products.length === 0)
+        return { notFound: true };
 
     return {
+        revalidate: 10,
         props: {
             products: data.products,
-        }
+        },
     }
 }
-
-export default HomePage;

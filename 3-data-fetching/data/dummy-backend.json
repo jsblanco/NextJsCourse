@@ -1,32 +1,39 @@
 {
   "products": [
     {
-      "id": "1",
-      "title": "Product 1"
+      "id": "p1",
+      "title": "Product 1",
+      "description": "This is the Product #1. A unique marvel of human ingenuity!"
     },
     {
       "id": "p2",
-      "title": "Product 2"
+      "title": "Product 2",
+      "description": "This is Product #2. A unique marvel of human ingenuity!"
     },
     {
       "id": "p3",
-      "title": "Product 3"
+      "title": "Product 3",
+      "description": "This is Product #3. A unique marvel of human ingenuity!"
     },
     {
       "id": "p4",
-      "title": "Product 4"
+      "title": "Product 4",
+      "description": "This is Product #4. A unique marvel of human ingenuity!"
     },
     {
       "id": "p5",
-      "title": "Product 5"
+      "title": "Product 5",
+      "description": "This is Product #5. A unique marvel of human ingenuity!"
     },
     {
       "id": "p6",
-      "title": "Product 6"
+      "title": "Product 6",
+      "description": "This is Product #6. A unique marvel of human ingenuity!"
     },
     {
       "id": "p7",
-      "title": "Product 7"
+      "title": "Product 7",
+      "description": "This is Product #7. A unique marvel of human ingenuity!"
     }
   ]
 }
