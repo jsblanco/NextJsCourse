@@ -1,4 +1,4 @@
-import { EventData } from '../../global-data';
+import { EventData } from '../helpers/util';
 import AddressIcon from '../icons/AddressIcon';
 import ArrowRightIcon from '../icons/ArrowRightIcon';
 import DateIcon from '../icons/DateIcon';

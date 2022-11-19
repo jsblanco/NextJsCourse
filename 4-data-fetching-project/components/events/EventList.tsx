@@ -1,4 +1,4 @@
-import { EventData } from '../../global-data';
+import { EventData } from '../helpers/util';
 import EventItem from './EventItem';
 import classes from './EventList.module.css'
 

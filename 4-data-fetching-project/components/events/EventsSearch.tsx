@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { months } from '../../global-data';
+import { months } from '../helpers/util';
 import Button from '../ui/Button';
 import classes from './EventsSearch.module.css'
 
