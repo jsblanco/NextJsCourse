@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import ErrorAlert from '../../components/events/ErrorAlert';
 import EventContent from '../../components/events/EventContent';
 import EventLogistics from '../../components/events/EventLogistics';
@@ -10,6 +11,10 @@ export default function EventPage({ event }) {
 
     return (
         <>
+            <Head>
+                <title>{event.title}</title>
+                <meta name="description" content={event.description}/>
+            </Head>
             <EventSummary title={event.title}/>
             <EventLogistics event={event} imageAlt={event.title}/>
             <EventContent>

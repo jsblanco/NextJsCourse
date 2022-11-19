@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { EventData } from '../helpers/util';
 import AddressIcon from '../icons/AddressIcon';
 import ArrowRightIcon from '../icons/ArrowRightIcon';
@@ -17,7 +18,7 @@ export default function EventItem({ event }: { event: EventData }) {
 
     return (
         <li className={classes.item}>
-            <img src={'/' + event.image} alt={event.title}/>
+            <Image src={'/' + event.image} alt={event.title} width={300} height={200}/>
             <div className={classes.content}>
                 <div className={classes.summary}>
                     <h2>{event.title}</h2>

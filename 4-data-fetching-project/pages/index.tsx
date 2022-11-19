@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import EventList from '../components/events/EventList';
 import { getFeaturedEvents } from '../components/helpers/api-util';
 
@@ -5,6 +6,10 @@ export default function Home({ featuredEvents }) {
 
     return (
         <>
+            <Head>
+                <title>NextJS Events</title>
+                <meta name="description" content="Sample project for learning NextJS"/>
+            </Head>
             <h1 className="center">Welcome home!</h1>
             <EventList events={featuredEvents}/>
         </>

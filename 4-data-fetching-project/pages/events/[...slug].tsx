@@ -1,4 +1,5 @@
 import EventTarget from 'next/dist/compiled/@edge-runtime/primitives/events';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ErrorAlert from '../../components/events/ErrorAlert';
@@ -6,7 +7,7 @@ import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/ResultsTitle';
 import { apiUrl } from '../../components/helpers/api-util';
 import useSWR from 'swr';
-import { EventData } from '../../components/helpers/util';
+import { EventData, months } from '../../components/helpers/util';
 
 
 export default function FilteredEventsPage(props) {
@@ -34,7 +35,7 @@ export default function FilteredEventsPage(props) {
     if (isLoading) return <p>Loading...</p>
 
     if (error || !filterData)
-        return <ErrorAlert link={'/events'} message={'Something went wrong'} />
+        return <ErrorAlert link={'/events'} message={'Something went wrong'}/>
 
     const year = +filterData[0];
     const month = +filterData[1];
@@ -51,12 +52,18 @@ export default function FilteredEventsPage(props) {
     })
 
     if (!filteredEvents || filteredEvents.length === 0)
-    return <ErrorAlert message="No events found for the chosen filters" link="/events"/>
+        return <ErrorAlert message="No events found for the chosen filters" link="/events"/>
 
-    return <>
-        <ResultsTitle date={new Date(year, month)}/>
-        <EventList events={filteredEvents}/>
-    </>
+    return (
+        <>
+            <Head>
+                <title>Filtered Events</title>
+                <meta name="description" content={`Events for ${months[month - 1]} ${year}`}/>
+            </Head>
+            <ResultsTitle date={new Date(year, month-1)}/>
+            <EventList events={filteredEvents}/>
+        </>
+    )
 }
 
 // export async function getServerSideProps(context) {
