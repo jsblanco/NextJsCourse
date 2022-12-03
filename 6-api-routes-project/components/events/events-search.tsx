@@ -4,8 +4,8 @@ import Button from '../ui/button';
 import classes from './events-search.module.css';
 
 function EventsSearch(props) {
-  const yearInputRef = useRef();
-  const monthInputRef = useRef();
+  const yearInputRef = useRef<HTMLSelectElement>();
+  const monthInputRef = useRef<HTMLSelectElement>();
 
   function submitHandler(event) {
     event.preventDefault();
