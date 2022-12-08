@@ -1,19 +1,34 @@
+import { ClientRequest } from 'http';
 import { MongoClient } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getClient, insertDocument } from '../../../helpers/db-util';
 
-export default async function newsletterHandler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== 'POST') return res.status(405);
+export default async function newsletterHandler(
+	req: NextApiRequest,
+	res: NextApiResponse
+) {
+	if (req.method !== 'POST') return res.status(405);
 
-    const { email } = req.body;
+	const { email } = req.body;
 
-    if (!email || !email.match('^(.+)@(\\S+)$'))
-        return res.status(422).json({ message: 'Did not provide a valid email address' });
+	if (!email || !email.match('^(.+)@(\\S+)$'))
+		return res
+			.status(422)
+			.json({ message: 'Did not provide a valid email address' });
 
-    const client = await MongoClient.connect('mongodb+srv://jorge:jorge@nextjscourse.fhw8fwf.mongodb.net/events?retryWrites=true&w=majority')
-    const db = client.db();
+	let client: MongoClient;
 
-    await db.collection('newsletter').insertOne({ email });
-    client.close();
+	try {
+		client = await getClient();
+	} catch (error) {
+        return res.status(500).json({ message: `Could not connect to the database` })
+    }
 
-    return res.status(201).json({ message: `email address '${email}' saved` })
+    try {
+        await insertDocument(client, 'newsletter', { email });
+        client.close();
+		res.status(201).json({ message: `email address '${email}' saved` });
+	} catch (error) {
+        res.status(201).json({ message: `Could not insert data into database` })
+    }
 }

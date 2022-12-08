@@ -1,60 +1,85 @@
-import { Db, MongoClient } from "mongodb";
-import { NextApiRequest, NextApiResponse } from "next";
-import { array } from "prop-types";
+import { InsertOneResult, MongoClient } from 'mongodb';
+import { NextApiRequest, NextApiResponse } from 'next';
+import {
+	getAllDocuments,
+	getClient,
+	insertDocument,
+} from '../../../helpers/db-util';
 
 export default async function commentsHandler(
-  req: NextApiRequest,
-  res: NextApiResponse
+	req: NextApiRequest,
+	res: NextApiResponse
 ) {
-  const { eventId } = req.query;
+	const { eventId } = req.query;
 
-  if (!eventId || Array.isArray(eventId)) return res.status(400);
+	if (!eventId || Array.isArray(eventId)) return res.status(400);
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://jorge:jorge@nextjscourse.fhw8fwf.mongodb.net/events?retryWrites=true&w=majority"
-  );
-  const db = client.db();
+	let client: MongoClient;
 
-  if (req.method === "POST") await addNewComment(db, eventId, req.body, res);
-  if (req.method === "GET") await fetchComments(db, eventId, res);
+	try {
+		client = await getClient();
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ message: `Could not connect to the database` });
+	}
 
-  client.close();
+	if (req.method === 'POST')
+		await addNewComment(client, eventId, req.body, res);
+	if (req.method === 'GET') await fetchComments(client, eventId, res);
+
+	client.close();
 }
 
 const addNewComment = async (
-  db: Db,
-  eventId: string,
-  commentData,
-  res: NextApiResponse
+	client: MongoClient,
+	eventId: string,
+	commentData: any,
+	res: NextApiResponse
 ) => {
-  const { email, name, text } = commentData;
+	const { email, name, text } = commentData;
 
-  if (!email || !email.match("^(.+)@(\\S+)$"))
-    return res
-      .status(422)
-      .json({ message: "Did not provide a valid email address" });
+	if (!email || !email.match('^(.+)@(\\S+)$'))
+		return res
+			.status(422)
+			.json({ message: 'Did not provide a valid email address' });
 
-  if (!name || !name.trim())
-    return res.status(422).json({ message: "Did not provide a valid  name" });
+	if (!name || !name.trim())
+		return res.status(422).json({ message: 'Did not provide a valid  name' });
 
-  if (!text || !text.trim())
-    return res.status(422).json({ message: "Did not provide a valid comment" });
+	if (!text || !text.trim())
+		return res.status(422).json({ message: 'Did not provide a valid comment' });
 
-  const comment = { email, name, text, eventId };
-  const response = await db.collection("comments").insertOne(comment);
+	const comment = { email, name, text, eventId };
 
-  res
-    .status(201)
-    .json({
-      message: "Added comment!",
-      comment: { ...comment, id: response.insertedId },
-    });
+	let response: InsertOneResult<any>;
+
+	try {
+		response = await insertDocument(client, 'comments', comment);
+		res.status(201).json({
+			message: 'Added comment!',
+			comment: { ...comment, _id: response.insertedId },
+		});
+	} catch (e) {
+		res.status(500).json({ message: 'Could not save comment' });
+	}
 };
 
-const fetchComments = async (db: Db, eventId: string, res: NextApiResponse) => {
-  const comments = await (
-    await db.collection("comments").find().sort({ _id: -1 }).toArray()
-  ).filter((comment) => comment.eventId === eventId);
+const fetchComments = async (
+	client: MongoClient,
+	eventId: string,
+	res: NextApiResponse
+) => {
+	let comments: any[];
 
-  res.status(200).json({ comments });
+	try {
+		comments = (await getAllDocuments(client, 'comments', { _id: -1 })).filter(
+			(comment) => comment.eventId === eventId
+		);
+		res.status(200).json({ comments });
+	} catch (e) {
+		res
+			.status(500)
+			.json({ message: 'Could not fetch comments for event ' + eventId });
+	}
 };
