@@ -5,10 +5,10 @@ export default function Hero() {
     return (
         <section className={classes.hero}>
             <div className={classes.image}>
-                <Image src="/images/site/jorge.png" alt="Jorge" width={300} height={300}/>
+                <Image src="/images/site/jorge-doodle.png" alt="Jorge" width={300} height={300}/>
             </div>
             <h1>Hi! I'm Jorge</h1>
-            <p>I blog about stuff I like, like frontend dev and 40k</p>
+            <p>Welcome to my humble miniature showcase. I mostly paint 40k models and Historicals, especially romans!</p>
         </section>
     )
 }
