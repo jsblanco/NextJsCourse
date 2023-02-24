@@ -19,6 +19,8 @@ puellis? Quaerere flumina quoque manentem: generum parabat in, ac felix qui
 emicat et nec carmine mente! Daulida utque ortas est aequora inter sacra novis
 *mugitibus membra nata*, verba, tibi.
 
+![Venomcrawler](venomcrawler.jpg)
+
 Aut alio Andraemon Pythia sceleratus tenebat **pes** esse nurusque quem. Opus
 iuga nec destrinxit, precaris advertite telique nimium, nec colla timentia
 adversaque natum! Est mutentur suae. Sociorum reddunt, plumbo hostem perpetuoque
@@ -29,7 +31,46 @@ missae haut manibus eiectantemque ingenti est.
 ## Nec puerpera motu
 
 Dicitur ignes dubitaret Helicen *fraterque aequo* infelicem tigride aetas: nec o
-mirabere tamen natura quantum! Auxilium nocenti pietatis abstemius est Ide
+mirabere tamen natura quantum!
+
+
+```js
+const numArr = new Array(9);
+  
+    for (let i = 0; i < numArr.length; i++) {
+        numArr[i] = new Array(9);
+    }
+
+    for (let i = 0; i < 9; i++) {
+        const remainingNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort((a,b)=>0.5 - Math.random());
+        for (let j = 0; j < 9; j++) {
+            let k = 0;
+            let inserted = false;
+
+            while (!inserted) {
+                let canInsert = true;
+                for (let menosI = 0; menosI<j; menosI++) {
+                  if (numArr[i][menosI] === remainingNumbers[k]) {
+                        canInsert = false;
+                        break;
+                    }
+                }
+
+                if (canInsert || k ) {
+                    numArr[i][j] = remainingNumbers[k]
+                    remainingNumbers.splice(k, 1)
+                    inserted = true;
+                } else {
+                    k++;
+                }
+            }
+        }
+    }
+
+return numArr;
+```
+
+ Auxilium nocenti pietatis abstemius est Ide
 [capillos](http://sua-orantem.net/ventis), nec petitos et arsit datam, Nostra?
 
     abendMatrix(xmp_apache / retina + software.ntfs_record.activexLeftPartition(
