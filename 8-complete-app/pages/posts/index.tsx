@@ -1,8 +1,17 @@
-import { DUMMY_POSTS } from '../../components/helper/dummydata';
+import { InferGetStaticPropsType } from 'next';
+import { getAllPosts } from '../../components/helper/posts-util';
 import AllPosts from '../../components/posts/AllPosts';
 
-export default function AllPostsPage() {
+export default function AllPostsPage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
     return (
-            <AllPosts posts={DUMMY_POSTS}/>
+        <AllPosts posts={posts}/>
     )
 }
+
+export const getStaticProps = () => (
+    {
+        props: {
+            posts: getAllPosts(),
+        },
+    }
+)
