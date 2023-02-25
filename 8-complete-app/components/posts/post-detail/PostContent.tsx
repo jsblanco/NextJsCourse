@@ -9,16 +9,7 @@ import { PostHeader } from './PostHeader';
 export const PostContent = ({ post }: { post: BlogPost }) => {
 
     const components = {
-        // img(image) {
-        //     return (
-        //         <Image
-        //             src={`/images/posts/${post.slug}/${image.src}`}
-        //             width={600}
-        //             height={450}
-        //             alt={image.alt}/>);
-        // }
-
-        p(paragraph) {
+        p: (paragraph) => {
             const { node } = paragraph;
 
             if (node.children[0].tagName === 'img') {
@@ -38,7 +29,7 @@ export const PostContent = ({ post }: { post: BlogPost }) => {
             return <p>{paragraph.children}</p>;
         },
 
-        code(code) {
+        code: (code) => {
             const { className, children } = code;
             const language = className?.split('-')[1]; // className is something like language-js => We need the "js" part here
             return (
