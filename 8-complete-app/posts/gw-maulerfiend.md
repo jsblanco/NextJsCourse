@@ -2,7 +2,7 @@
 featured: false
 slug: 'gw-maulerfiend'
 title: 'Maulerfiend'
-excerpt: "The Chaos Space Marines Maulerfiend is a terrifying model to bring more punch in melee to your army."
+excerpt: "The Chaos Space Marines Maulerfiend is a terrifying model that adds some punch in melee to your army."
 image: 'maulerfiend.jpg'
 date: '2022-12-13'
 manufacturer: 'Games Workshop'
@@ -74,11 +74,13 @@ return numArr;
  Auxilium nocenti pietatis abstemius est Ide
 [capillos](http://sua-orantem.net/ventis), nec petitos et arsit datam, Nostra?
 
+```c++
     abendMatrix(xmp_apache / retina + software.ntfs_record.activexLeftPartition(
             runtime_fpu, leak), responsive - smmParity(processor_application,
             copy_unfriend_bar), 24 + fileEditor);
     archie = stringImage(sequence, pc_bin_dsl + dns_snow_frozen + real);
     hostFsbAdc.subnet_gate_cyberbullying += led + matrix_bios_key;
+```
 
 ## Securi pleno saxo
 

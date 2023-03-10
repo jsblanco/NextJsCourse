@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 import { RequestStatus } from '../../components/helper/enums';
 import classes from './notification.module.css';
 
@@ -15,10 +16,12 @@ export default function Notification({ title, message, status }: NotificationPro
     if (status === RequestStatus.success) statusClasses = classes.success;
     else if (status === RequestStatus.error) statusClasses = classes.error;
 
-    return (
-        <div className={`${classes.notification} ${statusClasses}`}>
-            <h2>{title}</h2>
-            <p>{message}</p>
-        </div>
+    return createPortal(
+        (
+            <div className={`${classes.notification} ${statusClasses}`}>
+                <h2>{title}</h2>
+                <p>{message}</p>
+            </div>
+        ), document.getElementById('notifications')
     );
 }
